@@ -1,17 +1,15 @@
-import { getFileFormat } from "../helpers/fileHandler";
+import { getFileFormat, readFileAsDataURL } from "../helpers/fileHandler";
 
 export class CollageMaker {
   sizeFormat: string;
   images: File[];
   doc: any;
-  totalImgHorizontal: number;
-  totalImgVertical: number;
+  totalImgColumns: number;
+  totalImgRows: number;
   canvasWidth: number;
   canvasHeight: number;
-  unitWidth: number;
+  imgSideLength: number;
   margin: number;
-  imageSideLength: number;
-
   collageWidth: number;
   collageHeight: number;
 
@@ -24,16 +22,13 @@ export class CollageMaker {
     });
     this.canvasWidth = getFileFormat(sizeFormat)[0];
     this.canvasHeight = getFileFormat(sizeFormat)[1];
+    this.totalImgColumns = 9;
+    this.totalImgRows = 12;
+    this.imgSideLength = this.canvasWidth / (this.totalImgColumns + 1);
+    this.margin = this.imgSideLength / 2;
 
-    this.totalImgHorizontal = 9;
-    this.totalImgVertical = 13;
-    this.unitWidth = this.canvasWidth / (this.totalImgHorizontal + 1); // add 1 for margin on each side
-
-    this.margin = this.unitWidth / 2;
-    this.imageSideLength = this.unitWidth;
-
-    this.collageWidth = this.imageSideLength * this.totalImgHorizontal;
-    this.collageHeight = this.imageSideLength * this.totalImgVertical;
+    this.collageWidth = this.imgSideLength * this.totalImgColumns;
+    this.collageHeight = this.imgSideLength * this.totalImgRows;
   }
 
   drawCollageOutline() {
@@ -45,5 +40,83 @@ export class CollageMaker {
     this.doc.rect(x, y, width, height);
 
     return this;
+  }
+
+  drawCollageGrid() {
+    const points = this.getAllTopLeftPoints();
+
+    this.draw(async ([x, y]) => {
+      this.doc.setLineWidth(1);
+      this.doc.rect(x, y, this.imgSideLength, this.imgSideLength);
+    }, points);
+
+    return this;
+  }
+
+  async drawCollageImages() {
+    const points = this.getAllTopLeftPoints();
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) throw new Error("Canvas rendering context is not available");
+
+    await this.draw(async ([x, y, idx]) => {
+      if (idx >= this.images.length) return;
+
+      const imageFile = this.images[idx];
+      const imageUrl = await readFileAsDataURL(imageFile);
+      const img = new Image();
+      img.src = imageUrl as string;
+
+      await new Promise<void>((resolve) => {
+        img.onload = () => {
+          canvas.width = this.imgSideLength * 10; // 10 for quality improvement
+          canvas.height = this.imgSideLength * 10;
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          const imageDataUrl = canvas.toDataURL("image/jpeg");
+          this.doc.addImage(
+            imageDataUrl,
+            "JPEG",
+            x,
+            y,
+            this.imgSideLength,
+            this.imgSideLength
+          );
+          resolve();
+        };
+      });
+    }, points);
+
+    return this;
+  }
+
+  async draw<T>(fn: (item: T) => void, iter: T[]): Promise<void> {
+    for (const a of iter) {
+      await fn(a);
+    }
+  }
+
+  getPDF() {
+    return this.doc;
+  }
+
+  getAllTopLeftPoints(): number[][] {
+    const targets = [];
+
+    let idx = 0;
+
+    for (let r = 0; r < this.totalImgColumns; r++) {
+      for (let c = 0; c < this.totalImgRows; c++) {
+        targets.push([
+          +(this.margin + r * this.imgSideLength).toFixed(1),
+          +(this.margin + c * this.imgSideLength).toFixed(1),
+          idx++,
+        ]);
+      }
+    }
+    return targets;
   }
 }
