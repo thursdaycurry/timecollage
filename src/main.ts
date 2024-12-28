@@ -16,7 +16,9 @@ if (uploadedImages && downloadButton) {
       const imageArray: File[] = Array.from(images);
 
       const collage = new CollageMaker("a1", imageArray);
-      await collage.drawCollageOutline().drawCollageGrid().drawCollageImages();
+      await collage.drawCollageOutline().drawCollageImages();
+
+      await collage.drawCollageGrid(3);
 
       const pdf = collage.getPDF();
 

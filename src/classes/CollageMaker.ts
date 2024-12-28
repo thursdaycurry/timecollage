@@ -43,17 +43,6 @@ export class CollageMaker {
     return this;
   }
 
-  drawCollageGrid() {
-    const points = this.getAllTopLeftPoints();
-
-    this.draw(async ([x, y]) => {
-      this.doc.setLineWidth(1);
-      this.doc.rect(x, y, this.imgSideLength, this.imgSideLength);
-    }, points);
-
-    return this;
-  }
-
   async drawCollageImages() {
     const points = this.getAllTopLeftPoints();
     const canvas = document.createElement("canvas");
@@ -89,6 +78,17 @@ export class CollageMaker {
           resolve();
         };
       });
+    }, points);
+
+    return this;
+  }
+
+  async drawCollageGrid(lineWidth = 1) {
+    const points = this.getAllTopLeftPoints();
+
+    await this.draw(async ([x, y]) => {
+      this.doc.setLineWidth(lineWidth);
+      this.doc.rect(x, y, this.imgSideLength, this.imgSideLength);
     }, points);
 
     return this;
