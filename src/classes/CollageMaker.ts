@@ -1,3 +1,4 @@
+import jsPDF from "jspdf";
 import { getFileFormat, readFileAsDataURL } from "../helpers/fileHandler";
 
 export class CollageMaker {
@@ -16,7 +17,7 @@ export class CollageMaker {
   constructor(sizeFormat: string, images: any[]) {
     this.sizeFormat = sizeFormat;
     this.images = images;
-    this.doc = new window.jspdf.jsPDF({
+    this.doc = new jsPDF({
       unit: "mm",
       format: getFileFormat(sizeFormat),
     });
