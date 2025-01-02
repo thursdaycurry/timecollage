@@ -118,15 +118,9 @@ export class CollageMaker {
     }
   }
 
-  getPDF() {
-    return this.doc;
-  }
-
   getAllTopLeftPoints(): number[][] {
     const targets = [];
-
     let idx = 0;
-
     for (let r = 0; r < this.totalImgColumns; r++) {
       for (let c = 0; c < this.totalImgRows; c++) {
         targets.push([
@@ -137,5 +131,9 @@ export class CollageMaker {
       }
     }
     return targets;
+  }
+
+  getPDF() {
+    return this.doc;
   }
 }

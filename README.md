@@ -2,9 +2,13 @@
 
 TimeCollage is a web app that lets you upload images, arrange them in a grid, and download your collaged memories as a PDF.
 
-## Experience
+## Demo
 
 [visit timecollage page](https://timecollage.pages.dev/)
+
+## Feature
+
+- image cropping(center part)
 
 ## How to Use
 
