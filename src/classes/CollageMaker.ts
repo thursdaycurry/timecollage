@@ -58,13 +58,31 @@ export class CollageMaker {
       const img = new Image();
       img.src = imageUrl as string;
 
-      await new Promise<void>((resolve) => {
+      new Promise<void>((resolve) => {
         img.onload = () => {
+          const imgWidth = img.width;
+          const imgHeight = img.height;
+
+          const cropSideLength = Math.min(imgWidth, imgHeight);
+
+          const cropX = (imgWidth - cropSideLength) / 2;
+          const cropY = (imgHeight - cropSideLength) / 2;
+
           canvas.width = this.imgSideLength * 10; // 10 for quality improvement
           canvas.height = this.imgSideLength * 10;
-
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          ctx.drawImage(
+            img,
+            cropX,
+            cropY,
+            cropSideLength,
+            cropSideLength,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
 
           const imageDataUrl = canvas.toDataURL("image/jpeg");
           this.doc.addImage(
