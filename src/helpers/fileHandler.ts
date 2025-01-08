@@ -1,6 +1,6 @@
 export const getFileFormat = (size: string): [number, number] => {
   const formatDict: { [key: string]: [number, number] } = {
-    a1: [594, 841],
+    a1: [596, 842],
   };
 
   for (const key of Object.keys(formatDict)) {
