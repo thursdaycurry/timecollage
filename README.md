@@ -1,17 +1,16 @@
-# TimeCollage
+# Time Collage
 
-TimeCollage is a web app that lets you upload images, arrange them in a grid, and download your collaged memories as a PDF.
+Time collage is a web application to weave your visual moments into a collage with a format of grid 9 x 12.
 
-## Demo
+### How to Use
 
-[visit timecollage page](https://timecollage.pages.dev/)
+1. Put images: upload your images
+2. Collage it : request to generate the collage with the images
+3. Get collage : the collage in pdf format will be automatically downloaded
 
-## Feature
+### How to install
 
-- image cropping(center part)
-
-## How to Use
-
-1. **Upload Images**: Select the images you want to include in your collage.
-2. **Generate Collage**: The app automatically arranges the images into a grid on the PDF.
-3. **Download PDF**: Click "Download PDF" to save and share your collage.
+1. Clone the repository
+2. Run `npm install`
+3. Run `npm run dev`
+4. go to `localhost:5173` in your browser
