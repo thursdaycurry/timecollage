@@ -79,9 +79,10 @@ export class CollageMaker {
   }
 
   addText() {
-    this.doc.setFontSize(50);
+    this.doc.setFont("times");
+    this.doc.setFontSize(30);
     this.doc.text(
-      "Time collage, Memory remains",
+      "Per aspera ad astra",
       this.canvasWidth / 2,
       this.margin + this.totalImgRows * this.imgSideLength + this.margin,
       {

@@ -44,7 +44,6 @@ const timeTextList = [
 
 const container = document.querySelector(".container") as HTMLElement;
 
-// uploaded images event listener
 if (uploadedImages) {
   uploadedImages.addEventListener("change", (e) => {
     const files = uploadedImages.files;
@@ -61,7 +60,6 @@ if (uploadedImages) {
           const img = document.createElement("img");
           img.src = e.target?.result as string;
           img.alt = file.name;
-          // img.style.width = "8px";
           img.style.height = "8px";
           previewContainer.appendChild(img);
 
@@ -88,7 +86,6 @@ if (uploadedImages) {
   });
 }
 
-// download button event listener
 if (uploadedImages && downloadButton) {
   downloadButton.addEventListener("click", async (): Promise<void> => {
     const images: FileList | null = uploadedImages.files;
