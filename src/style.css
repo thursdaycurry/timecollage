@@ -120,29 +120,38 @@ footer {
   }
 
   .container {
-    padding: 20px;
+    padding: 10px;
     padding-top: 40px;
     min-height: 300px;
   }
+  #title {
+    height: 32px;
+  }
+
+  #description {
+    font-size: 0.6rem;
+  }
 
   #timeText {
-    width: 100px;
-    font-size: 2rem;
+    width: 60px;
+    font-size: 1.2rem;
   }
 
   #non-timeText {
-    width: 120px;
-    font-size: 1.8rem;
+    width: 60px;
+    font-size: 1rem;
   }
 
   label {
-    font-size: 0.8rem;
-    padding: 8px 16px;
+    padding: 8px 5px;
+    font-size: 0.9rem;
+    width: 110px;
   }
 
   button {
-    padding: 8px 16px;
+    padding: 8px 5px;
     font-size: 0.9rem;
+    width: 110px;
   }
 }
 
