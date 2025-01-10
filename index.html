@@ -7,22 +7,27 @@
     <title>Time Collage</title>
   </head>
   <body>
-    <!-- <nav>
-      <a href="#home">Home</a>
-      <a href="#principles">Principles</a>
-    </nav> -->
     <div class="container">
       <div>
         <div id="title">
           <span id="timeText">Time</span>
           <span id="non-timeText">Collage</span>
         </div>
+        <p id="description">Weave your moments into timeless collage</p>
 
-        <p>Collage your time, archive your memories</p>
+        <div class="background">
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+        </div>
 
-        <label for="uploadedImages">Upload Images</label>
+        <label id="uploadedImagesLabel" for="uploadedImages"
+          >Upload Images</label
+        >
         <input type="file" id="uploadedImages" accept="image/*" multiple />
-        <button id="downloadPdf">Download PDF</button>
+        <button id="downloadBtn">Touch your memories</button>
       </div>
       <div id="previewContainer"></div>
     </div>

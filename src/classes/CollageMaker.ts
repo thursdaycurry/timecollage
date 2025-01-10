@@ -13,6 +13,9 @@ export class CollageMaker {
   margin: number;
   collageWidth: number;
   collageHeight: number;
+  color1: number[];
+  color2: number[];
+  color3: number[];
 
   constructor(sizeFormat: string, images: any[]) {
     this.sizeFormat = sizeFormat;
@@ -30,6 +33,10 @@ export class CollageMaker {
 
     this.collageWidth = this.imgSideLength * this.totalImgColumns;
     this.collageHeight = this.imgSideLength * this.totalImgRows;
+
+    this.color1 = [55, 61, 59];
+    this.color2 = [233, 233, 41];
+    this.color3 = [192, 191, 187];
   }
 
   drawCollageOutline() {
@@ -40,6 +47,47 @@ export class CollageMaker {
     this.doc.setLineWidth(1);
     this.doc.rect(x, y, width, height);
 
+    return this;
+  }
+
+  drawCanvasBackground() {
+    const [r1, g1, b1] = this.color1;
+    const [r2, g2, b2] = this.color2;
+    const [r3, g3, b3] = this.color3;
+    this.doc.setFillColor(r2, g2, b2);
+    this.doc.rect(0, 0, this.canvasWidth, this.canvasHeight, "F");
+    // this.doc.rect(0, 0, this.canvasWidth, this.margin, "F"); // top bar
+    // this.doc.rect(0, 0, this.margin, this.canvasHeight, "F"); // left bar
+
+    // this.doc.rect(
+    //   this.canvasWidth - this.margin,
+    //   0,
+    //   this.margin,
+    //   this.canvasHeight,
+    //   "F"
+    // ); // right bar
+    // this.doc.rect(
+    //   0,
+    //   this.margin + this.totalImgRows * this.imgSideLength,
+    //   this.canvasWidth,
+    //   this.canvasHeight -
+    //     (this.margin + this.totalImgRows * this.imgSideLength),
+    //   "F"
+    // ); // bottom bar
+
+    return this;
+  }
+
+  addText() {
+    this.doc.setFontSize(50);
+    this.doc.text(
+      "Time collage, Memory remains",
+      this.canvasWidth / 2,
+      this.margin + this.totalImgRows * this.imgSideLength + this.margin,
+      {
+        align: "center",
+      }
+    );
     return this;
   }
 

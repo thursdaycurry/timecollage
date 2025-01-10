@@ -4,20 +4,23 @@ import "./style.css";
 const uploadedImages = document.getElementById(
   "uploadedImages"
 ) as HTMLInputElement | null;
+const uploadedImagesLabel = document.getElementById(
+  "uploadedImagesLabel"
+) as HTMLInputElement | null;
 
 const previewContainer = document.getElementById(
   "previewContainer"
 ) as HTMLElement | null;
 
-const downloadButton: HTMLElement | null =
-  document.getElementById("downloadPdf");
+const downloadButton = document.getElementById(
+  "downloadBtn"
+) as HTMLElement | null;
 
-const timeTextElement: HTMLElement | null = document.getElementById(
+const timeTextElement = document.getElementById(
   "timeText"
 ) as HTMLElement | null;
 
 const timeTextList = [
-  // "Time", // English (USA, UK, Canada, Australia, etc.)
   "Tiempo", // Spanish (Argentina, Mexico, Spain)
   "Tempo", // Italian (Italy)
   "Temps", // French (France, Canada)
@@ -75,6 +78,8 @@ if (uploadedImages) {
 
           if (loadedCount === files.length && timeTextElement) {
             timeTextElement.textContent = "Time";
+            downloadButton!.style.display = "inline-block";
+            uploadedImagesLabel!.style.display = "none";
           }
         };
         reader.readAsDataURL(file);
@@ -92,7 +97,12 @@ if (uploadedImages && downloadButton) {
       const imageArray: File[] = Array.from(images);
 
       const collage = new CollageMaker("a1", imageArray);
-      await collage.drawCollageOutline().drawCollageImages();
+
+      await collage
+        .drawCanvasBackground()
+        .addText()
+        .drawCollageOutline()
+        .drawCollageImages();
 
       await collage.drawCollageGrid(3);
 
