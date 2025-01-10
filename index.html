@@ -23,11 +23,15 @@
           <div class="wave"></div>
         </div>
 
-        <label id="uploadedImagesLabel" for="uploadedImages"
-          >Upload Images</label
-        >
-        <input type="file" id="uploadedImages" accept="image/*" multiple />
-        <button id="downloadBtn">Touch your memories</button>
+        <label id="uploadedImagesLabel" for="uploadedImages">Put images</label>
+        <input
+          type="file"
+          id="uploadedImages"
+          accept="image/*"
+          multiple
+          maxlength="100"
+        />
+        <button id="downloadBtn">Collage it</button>
       </div>
       <div id="previewContainer"></div>
     </div>
