@@ -1,15 +1,12 @@
 # Time Collage
 
-[Demo](https://timecollage.pages.dev/)
-
+![Time Collage Preview](./public/8.jpg)
+[Create your own collage here!](https://timecollage.pages.dev/)
+Time collage is a web application to weave your visual moments into a collage with a format of grid 9 x 12.
 
 ![Time Collage Preview](./public/1.jpg)
 ![Time Collage Preview](./public/2.jpg)
-![Time Collage Preview](./public/3.jpg)
-![Time Collage Preview](./public/8.jpg)
 ![Time Collage Preview](./public/9.jpg)
-
-Time collage is a web application to weave your visual moments into a collage with a format of grid 9 x 12.
 
 ### How to Use
 
