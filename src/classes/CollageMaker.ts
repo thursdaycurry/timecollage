@@ -56,25 +56,6 @@ export class CollageMaker {
     const [r3, g3, b3] = this.color3;
     this.doc.setFillColor(r2, g2, b2);
     this.doc.rect(0, 0, this.canvasWidth, this.canvasHeight, "F");
-    // this.doc.rect(0, 0, this.canvasWidth, this.margin, "F"); // top bar
-    // this.doc.rect(0, 0, this.margin, this.canvasHeight, "F"); // left bar
-
-    // this.doc.rect(
-    //   this.canvasWidth - this.margin,
-    //   0,
-    //   this.margin,
-    //   this.canvasHeight,
-    //   "F"
-    // ); // right bar
-    // this.doc.rect(
-    //   0,
-    //   this.margin + this.totalImgRows * this.imgSideLength,
-    //   this.canvasWidth,
-    //   this.canvasHeight -
-    //     (this.margin + this.totalImgRows * this.imgSideLength),
-    //   "F"
-    // ); // bottom bar
-
     return this;
   }
 
